@@ -1,7 +1,7 @@
 const express = require("express");
 //routes
 const merchantRoutes = require("./Routes/merchants");
-const yourMp = require("./api/knowYourMp");
+const yourMp = require("./Routes/knowYourMp");
 
 const app = express();
 
