@@ -7,9 +7,9 @@ const router = express.Router();
 router.use(bodyParser());
 
 /* ---------------------------GET ALL STATES FOR FILTERS--------------------------------------- */
-router.get("/getAllStates", (req, res) => {
+router.get("/getAllStates/:state", (req, res) => {
   try {
-    const allStates = returnUniqueValues(data, req.body.state);
+    const allStates = returnUniqueValues(data, req.params.state);
     return res.status(200).json({
       status: true,
       data: allStates,
@@ -25,9 +25,9 @@ router.get("/getAllStates", (req, res) => {
 /* ---------------------------------^^^^^^^^^^^^^^^--------------------------------------------- */
 
 /* ---------------GET ALL CONSTITUENCIES BASED ON STATES---------------------------------------- */
-router.get("/getAllPCNames", (req, res) => {
+router.get("/getAllPCNames/:state", (req, res) => {
   try {
-    const allPcInState = getUniquePCNamesByState(data, req.body.state);
+    const allPcInState = getUniquePCNamesByState(data, req.params.state);
     return res.status(200).json({
       status: true,
       data: allPcInState,
@@ -45,11 +45,8 @@ router.get("/getAllPCNames", (req, res) => {
 /* --------------------GET CANDIDATES LIST PC WISE ---------------------------------------------*/
 router.get("/getAllCandidates", (req, res) => {
   try {
-    const allCandidatesInPc = getAllCandidatesinpc(
-      data,
-      req.body.state,
-      req.body.pcname
-    );
+    const { state, pcname } = req.query;
+    const allCandidatesInPc = getAllCandidatesinpc(data, state, pcname);
     return res.status(200).json({
       status: true,
       data: allCandidatesInPc,
