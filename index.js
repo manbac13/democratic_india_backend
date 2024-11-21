@@ -3,6 +3,7 @@ const express = require("express");
 const yourMp = require("./Routes/knowYourMp");
 const filters = require("./Routes/filters");
 const results = require("./Routes/winners");
+const statewisedata = require("./Routes/stateWise")
 const cors = require("cors");
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use("/yourmp", yourMp);
 app.use("/filters", filters);
 app.use("/results", results);
+app.use("/statewise", statewisedata)
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
